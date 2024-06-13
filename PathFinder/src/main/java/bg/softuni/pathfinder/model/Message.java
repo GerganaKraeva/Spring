@@ -4,14 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.Instant;
-@Getter
-@Setter
-@NoArgsConstructor
+
 @Entity
 @Table(name= "messages")
 public class Message extends BaseEntity{
@@ -28,4 +23,37 @@ public class Message extends BaseEntity{
     @ManyToOne(optional = false)
     private User recipient;
 
+ public Message() {}
+
+    public Instant getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Instant dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public User getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(User recipient) {
+        this.recipient = recipient;
+    }
 }

@@ -1,14 +1,9 @@
 package bg.softuni.pathfinder.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.Instant;
-@Getter
-@Setter
-@NoArgsConstructor
+
 @Entity
 @Table(name = "comments")
 public class Comment extends BaseEntity{
@@ -29,4 +24,45 @@ public class Comment extends BaseEntity{
     @ManyToOne(optional = false, fetch = FetchType.LAZY )
     private Route route;
 
+    public Comment() {}
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
+    }
+
+    public Instant getCreated() {
+        return created;
+    }
+
+    public void setCreated(Instant created) {
+        this.created = created;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
 }
