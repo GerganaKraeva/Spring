@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 
 public class UserRegisterDto {
     @NotBlank
+    @Size(min=2)
     private String username;
 
     @NotEmpty
