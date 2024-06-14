@@ -8,7 +8,7 @@ public class CurrentUser {
     private User user;
 
     public boolean isLoggedIn() {
-        return this.user !=null;
+        return this.user != null;
     }
 
     public User getUser() {
