@@ -57,8 +57,8 @@ public class UserController {
     }
     @PostMapping("users/login")
     public  String login(UserLoginDto loginData) {
-        System.out.println();
-        return "login";
+        userService.login(loginData);
+        return "redirect:/";
     }
 
 
