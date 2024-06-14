@@ -14,12 +14,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
+    private final CurrentUser currentUser;
 
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, CurrentUser currentUser) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
+        this.currentUser = currentUser;
     }
 
     public void register(UserRegisterDto userRegisterDto) {
@@ -33,9 +35,10 @@ public class UserService {
 
         if (user == null) {
             //to do throw error
+            return;
         }
-        if (passwordEncoder.matches(loginData.getPassword(), user.getPassword())) {
-
+        if (passwordEncoder.matches(loginData.getPassword(), user.getPassword()) && !currentUser.isLoggedIn()) {
+            currentUser.setUser(user);
         }
     }
 }
