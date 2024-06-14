@@ -12,19 +12,18 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final ModelMapper mapper;
+    private final ModelMapper modelMapper;
 
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, ModelMapper mapper) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.mapper = mapper;
+        this.modelMapper = modelMapper;
     }
 
     public void register(UserRegisterDto userRegisterDto) {
-        User user = this.mapper.map(userRegisterDto, User.class);
+        User user = this.modelMapper.map(userRegisterDto, User.class);
         user.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
-
         userRepository.save(user);
     }
 }

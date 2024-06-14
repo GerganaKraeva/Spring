@@ -32,9 +32,9 @@
                     </div>
                     <div class="col-auto">
                         <input
-                                th:field="*{username}"
-                                th:errorclass="is-valid"
-                                name="username"
+                               th:field="*{username}"
+                               th:errorclass="is-invalid"
+                               name="username"
                                type="text"
                                id="inputUsername"
                                class="form-control"
@@ -56,8 +56,7 @@
                     <div class="col-auto">
                         <input name="fullName"
                                th:field="*{fullName}"
-                               th:errorclass="is-valid"
-
+                               th:errorclass="is-invalid"
                                type="text"
                                id="inputFullName"
                                class="form-control"
@@ -75,7 +74,7 @@
                     <div class="col-auto">
                         <input name="email"
                                th:field="*{email}"
-                               th:errorclass="is-valid"
+                               th:errorclass="is-invalid"
                                type="email"
                                id="inputEmail"
                                class="form-control"
@@ -91,7 +90,7 @@
                     <div class="col-auto">
                         <input name="age"
                                th:field="*{age}"
-                               th:errorclass="is-valid"
+                               th:errorclass="is-invalid"
                                type="number"
                                id="inputAge"
                                class="form-control"
@@ -107,13 +106,12 @@
                     </div>
                     <div class="col-auto">
                         <select name="level"
-                               th:field="*{level}"
-                               th:errorclass="is-valid"
-                               type=""
-                               id="selectLevel"
-                               class="form-control"
-                        >
-                            <option th:each="levelOption: ${levels}" th:value = "levelOption" th:text="${levelOption}"></option>
+                                th:field="*{level}"
+                                type=""
+                                id="selectLevel"
+                                class="form-control">
+                            <option th:each="levelOption: ${levels}" th:value="${levelOption}"
+                                    th:text="${levelOption}"></option>
                         </select>
 
                     </div>
@@ -125,7 +123,7 @@
                     <div class="col-auto">
                         <input name="password"
                                th:field="*{password}"
-                               th:errorclass="is-valid"
+                               th:errorclass="is-invalid"
                                type="password"
                                id="inputPassword"
                                class="form-control"
@@ -144,7 +142,7 @@
                     <div class="col-auto">
                         <input name="confirmPassword"
                                th:field="*{confirmPassword}"
-                               th:errorclass="is-valid"
+                               th:errorclass="is-invalid"
                                type="password"
                                id="inputConfirmPassword"
                                class="form-control"

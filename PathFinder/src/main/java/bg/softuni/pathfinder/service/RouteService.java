@@ -19,9 +19,9 @@ public class RouteService {
     private Random random;
     private ModelMapper modelMapper;
 
-    public RouteService(RouteRepository routeRepository) {
+    public RouteService(RouteRepository routeRepository, ModelMapper modelMapper) {
         this.routeRepository = routeRepository;
-        this.modelMapper=new ModelMapper();
+        this.modelMapper = modelMapper;
         this.random = new Random();
     }
     @Transactional
