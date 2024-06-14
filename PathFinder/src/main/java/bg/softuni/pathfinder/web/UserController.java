@@ -1,5 +1,8 @@
 package bg.softuni.pathfinder.web;
 
+import bg.softuni.pathfinder.model.Level;
+import bg.softuni.pathfinder.service.UserService;
+import bg.softuni.pathfinder.web.dto.UserLoginDto;
 import bg.softuni.pathfinder.web.dto.UserRegisterDto;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -13,9 +16,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("users")
 public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/register")
     public String viewRegister(Model model) {
        model.addAttribute("registerData", new UserRegisterDto());
+       model.addAttribute("levels", Level.values());
         return "register";
     }
 
@@ -33,6 +44,7 @@ public class UserController {
 //            return "register";
 //        }
 
+        userService.register(userRegisterDto);
         return "redirect:/users/login";
 
     }
@@ -41,6 +53,10 @@ public class UserController {
     public String viewLogin() {
         return "login";
 
+    }
+    @PostMapping("/login")
+    public  String login(UserLoginDto userLoginDto) {
+        return "login";
     }
 
 
