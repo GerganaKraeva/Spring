@@ -2,6 +2,7 @@ package bg.softuni.pathfinder.service;
 
 import bg.softuni.pathfinder.data.UserRepository;
 import bg.softuni.pathfinder.model.User;
+import bg.softuni.pathfinder.service.dto.UserProfileDto;
 import bg.softuni.pathfinder.web.dto.UserLoginDto;
 import bg.softuni.pathfinder.web.dto.UserRegisterDto;
 import org.modelmapper.ModelMapper;
@@ -32,13 +33,19 @@ public class UserService {
 
     public void login(UserLoginDto loginData) {
         User user = userRepository.findByUsername(loginData.getUsername());
-
         if (user == null) {
-            //to do throw error
-            return;
+            throw new RuntimeException("Username not found");
         }
         if (passwordEncoder.matches(loginData.getPassword(), user.getPassword()) && !currentUser.isLoggedIn()) {
             currentUser.setUser(user);
         }
+    }
+
+    public void logout() {
+        currentUser.setUser(null);
+    }
+
+    public UserProfileDto getProfileData() {
+        return modelMapper.map(currentUser.getUser(), UserProfileDto.class);
     }
 }

@@ -1,5 +1,7 @@
 package bg.softuni.pathfinder.web;
 
+import bg.softuni.pathfinder.model.Category;
+import bg.softuni.pathfinder.model.CategoryName;
 import bg.softuni.pathfinder.model.Level;
 import bg.softuni.pathfinder.service.UserService;
 import bg.softuni.pathfinder.web.dto.UserLoginDto;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Locale;
+
 @Controller
 public class UserController {
 
@@ -59,6 +64,20 @@ public class UserController {
     public  String login(UserLoginDto loginData) {
         userService.login(loginData);
         return "redirect:/";
+    }
+
+    @PostMapping("users/logout")
+    public  String logout() {
+        userService.logout();
+        return "redirect:/";
+    }
+
+    @GetMapping("users/profile")
+    public ModelAndView profile(){
+        ModelAndView modelAndView=new ModelAndView("profile");
+        modelAndView.addObject("profileData", userService.getProfileData());
+
+        return modelAndView;
     }
 
 
