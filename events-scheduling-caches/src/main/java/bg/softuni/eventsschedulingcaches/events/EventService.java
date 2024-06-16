@@ -8,6 +8,8 @@ public class EventService {
 
     @EventListener
     public void onHelloWorldEvent(HelloWorldEvent helloWorldEvent) {
-        System.out.println("Message received: "+helloWorldEvent.getMessage());
+//        System.out.println("Message received: "+helloWorldEvent.getMessage());
+        System.out.println("In EventService: "+ Thread.currentThread());
+
     }
 }
