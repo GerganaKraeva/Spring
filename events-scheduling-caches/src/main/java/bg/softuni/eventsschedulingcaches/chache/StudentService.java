@@ -3,6 +3,7 @@ package bg.softuni.eventsschedulingcaches.chache;
 import bg.softuni.eventsschedulingcaches.schaduling.CronScheduled;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -41,6 +42,9 @@ public class StudentService {
                 new StudentDto("Milena",12));
     }
 
+
+    @CacheEvict("students")
+    public void  removeStudentsFromCache(){}
 
     @Cacheable(value = "students", key="#name")
     public StudentDto getStudentByName(String name) {

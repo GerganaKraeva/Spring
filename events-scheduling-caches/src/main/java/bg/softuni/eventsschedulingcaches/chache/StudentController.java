@@ -19,19 +19,40 @@ public class StudentController {
 
     @GetMapping("/cache")
     public String getAll() {
-       studentService.
-                getAllStudents()
-                .forEach(System.out::println);
-        System.out.println("----------");
         studentService.
                 getAllStudents()
                 .forEach(System.out::println);
         System.out.println("----------");
+
         studentService.
                 updateStudents();
         studentService.
+                removeStudentsFromCache();
+        System.out.println("remove");
+        studentService.
                 getAllStudents()
                 .forEach(System.out::println);
+        System.out.println("----------");
+
+
+
+
+//       studentService.
+//                getAllStudents()
+//                .forEach(System.out::println);
+//        System.out.println("----------");
+//        studentService.
+//                getAllStudents()
+//                .forEach(System.out::println);
+//        System.out.println("----------");
+//        studentService.
+//                updateStudents();
+//        studentService.
+//                getAllStudents()
+//                .forEach(System.out::println);
+//
+
+
 //        var student1 = studentService.getStudentByName("Pesho");
 //        var student2 =studentService.getStudentByName("Pesho");
 //        var student3 =studentService.getStudentByName("Ani");
