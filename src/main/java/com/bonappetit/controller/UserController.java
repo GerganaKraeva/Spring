@@ -1,6 +1,8 @@
 package com.bonappetit.controller;
 
+import com.bonappetit.model.dto.UserLoginDto;
 import com.bonappetit.model.dto.UserRegisterDto;
+import com.bonappetit.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,10 +13,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
+    private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @ModelAttribute("registerData")
     public UserRegisterDto registerDto() {
         return new UserRegisterDto();
+    }
+
+    @ModelAttribute("loginData")
+    public UserLoginDto loginDto() {
+        return new UserLoginDto();
     }
 
     @GetMapping("/register")
@@ -28,13 +40,48 @@ public class UserController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !data.getPassword().equals(data.getConfirmPassword())) {
             redirectAttributes.addFlashAttribute("registerData", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
 
             return "redirect:/register";
         }
+        boolean success = userService.register(data);
+
+        if (!success) {
+            return "redirect:/register";
+        }
         return "redirect:/login";
 
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String doLogin(
+            @Valid UserLoginDto data,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("loginData", data);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData", bindingResult);
+
+
+            return "redirect:/login";
+        }
+        boolean success = userService.login(data);
+        if (!success) {
+            redirectAttributes.addFlashAttribute("loginError", true);
+
+            return "redirect:/login";
+
+        }
+
+
+        return "redirect:/home";
     }
 }
