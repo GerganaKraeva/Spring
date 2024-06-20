@@ -24,6 +24,12 @@ public class Category {
         this.recipes=new ArrayList<>();
     }
 
+    public Category(CategoryName name, String description) {
+        this();
+        this.name=name;
+        this.description=description;
+    }
+
     public long getId() {
         return id;
     }
