@@ -12,10 +12,10 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg bg-nav rounded " >
-        <a class="nav-link my-text-color active h5 " th:href="@{/}">Dictionary App</a>
+        <a class="nav-link my-text-color active h5 " th:href = "@{/}">Dictionary App</a>
         <a class="nav-link my-text-color active h5  "
-           th:href="@{/word-add}"
-           th:if="${@userSession.isUserLoggedIn}"
+           th:href = "@{/word-add}"
+           th:if = "${@userSession.isUserLoggedIn}"
         >
             Add Word
         </a>
@@ -23,18 +23,18 @@
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
                 <li class="nav-item col-md-4"
-                    th:unless="${@userSession.isUserLoggedIn}"
+                    th:unless = "${@userSession.isUserLoggedIn}"
                 >
-                    <a class="nav-link active h5 my-text-color" href="@{/login}">Login</a>
+                    <a class="nav-link active h5 my-text-color" th:href="@{/login}">Login</a>
                 </li>
 
                 <li class="nav-item col-md-4"
-                    th:unless="${@userSession.isUserLoggedIn}"
+                    th:unless = "${@userSession.isUserLoggedIn}"
                 >
-                    <a class="nav-link my-text-color active h5 " href="@{/register}">Register</a>
+                    <a class="nav-link my-text-color active h5 " th:href= "@{/register}">Register</a>
                 </li>
                     <a
-                            th:if="${@userSession.isUserLoggedIn}"
+                            th:if = "${@userSession.isUserLoggedIn}"
                             class="nav-link h5 my-text-color"
                     >
                         Welcome, <span th:text="${@userSession.username()}"></span>
@@ -42,8 +42,16 @@
                 <li class="nav-item col-md-4"
                     th:if="${@userSession.isUserLoggedIn}"
                 >
-                   <form th:action="@{/logout}" th:method="POST">
-                       <button class="nav-link my-text-color active h5 " type="submit">Logout</button>
+                   <form
+                           th:action="@{/logout}"
+                           th:method="POST"
+                   >
+                       <button
+                               class="nav-link my-text-color active h5 "
+                               type="submit"
+                       >
+                           Logout
+                       </button>
                    </form>
                 </li>
             </ul>
