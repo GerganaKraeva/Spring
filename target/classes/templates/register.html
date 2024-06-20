@@ -11,7 +11,7 @@
     <form
             class="mx-auto w-25 bg-blur rounded"
             method="POST"
-            action="@{/register}"
+            th:action="@{/register}"
             th:object="${registerData}"
     >
 
@@ -31,7 +31,7 @@
                    name="username"
                    th:field = "*{username}"
                    th:errorclass = "'is-invalid alert-danger'"
-            / >
+            />
             <small class="invalid-feedback text-danger">Username error message</small>
         </div>
 
