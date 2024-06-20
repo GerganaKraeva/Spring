@@ -33,11 +33,11 @@ public class InitService implements CommandLineRunner {
         if (count > 0) {
             return;
         }
-        List <Category> toInsert = Arrays.stream(CategoryName.values())
+        List<Category> toInsert = Arrays.stream(CategoryName.values())
                         .map(cat -> new Category(cat, descriptions.get(cat)))
                         .toList();
 
-        this.categoryRepository.save(toInsert);
+        this.categoryRepository.saveAll(toInsert);
 
     }
 }
