@@ -1,22 +1,21 @@
 package com.bonappetit.model.dto;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class UserRegisterDto {
-    @NotBlank
+    @NotNull
     @Size(min = 3, max = 20)
     private String username;
-    @NotBlank
+    @NotNull
     @Email
     private String email;
-    @NotBlank
+    @NotNull
     @Size(min = 3, max = 20)
     private String password;
 
-    @NotBlank
-    @Size(min = 3, max = 20)
+
     private String confirmPassword;
 
     public UserRegisterDto() {

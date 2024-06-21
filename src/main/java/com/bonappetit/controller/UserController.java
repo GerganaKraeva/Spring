@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -21,6 +21,7 @@ public class UserController {
 
     @ModelAttribute("registerData")
     public UserRegisterDto registerDto() {
+
         return new UserRegisterDto();
     }
 
@@ -42,7 +43,8 @@ public class UserController {
     ) {
         if (bindingResult.hasErrors() || !data.getPassword().equals(data.getConfirmPassword())) {
             redirectAttributes.addFlashAttribute("registerData", data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
+            redirectAttributes.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.registerData", bindingResult);
 
             return "redirect:/register";
         }

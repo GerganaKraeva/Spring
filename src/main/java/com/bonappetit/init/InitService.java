@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Component
 public class InitService implements CommandLineRunner {
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     private final Map<CategoryName, String> descriptions = Map.of(
             CategoryName.MAIN_DISH, "Heart of the meal, substantial and satisfying; main dish delights taste buds.",
