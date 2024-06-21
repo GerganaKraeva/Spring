@@ -1,5 +1,6 @@
 package com.bonappetit.controller;
 
+import com.bonappetit.config.UserSession;
 import com.bonappetit.model.dto.AddRecipeDto;
 import com.bonappetit.service.RecipeService;
 import jakarta.validation.Valid;
@@ -14,9 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final UserSession userSession;
 
-    public RecipeController(RecipeService recipeService) {
+    public RecipeController(RecipeService recipeService, UserSession userSession) {
         this.recipeService = recipeService;
+        this.userSession = userSession;
     }
 
     @ModelAttribute("recipeData")
@@ -25,6 +28,9 @@ public class RecipeController {
     }
     @GetMapping("/recipe-add")
     public String addRecipe() {
+        if(!userSession.isLoggedIn()) {
+            return "redirect:/";
+        }
         return "recipe-add";
     }
 
@@ -34,11 +40,13 @@ public class RecipeController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
+        if(!userSession.isLoggedIn()) {
+            return "redirect:/";
+        }
         if(bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("recipeData", data);
             redirectAttributes.addFlashAttribute(
-                    "org.sprigframework.validation.BindingResult.recipeData", bindingResult);
-
+                    "org.springframework.validation.BindingResult.recipeData", bindingResult);
 
             return "redirect:/recipe-add";
         }
@@ -50,7 +58,7 @@ public class RecipeController {
             return "redirect:/recipe-add";
 
         }
-        return "redirect:/recipe-add";
+        return "redirect:/home";
     }
 
 }

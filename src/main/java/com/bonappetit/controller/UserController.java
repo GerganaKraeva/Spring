@@ -1,5 +1,6 @@
 package com.bonappetit.controller;
 
+import com.bonappetit.config.UserSession;
 import com.bonappetit.model.dto.UserLoginDto;
 import com.bonappetit.model.dto.UserRegisterDto;
 import com.bonappetit.service.UserService;
@@ -14,9 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class UserController {
     private final UserService userService;
-
-    public UserController(UserService userService) {
+    private final UserSession userSession;
+    public UserController(UserService userService, UserSession userSession) {
         this.userService = userService;
+        this.userSession = userSession;
     }
 
     @ModelAttribute("registerData")
@@ -32,6 +34,9 @@ public class UserController {
 
     @GetMapping("/register")
     public String register() {
+        if(!userSession.isLoggedIn()) {
+            return "redirect:/home";
+        }
         return "register";
     }
 
@@ -41,6 +46,9 @@ public class UserController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
+        if(!userSession.isLoggedIn()) {
+            return "redirect:/home";
+        }
         if (bindingResult.hasErrors() || !data.getPassword().equals(data.getConfirmPassword())) {
             redirectAttributes.addFlashAttribute("registerData", data);
             redirectAttributes.addFlashAttribute(
@@ -59,6 +67,9 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
+        if(!userSession.isLoggedIn()) {
+            return "redirect:/home";
+        }
         return "login";
     }
 
@@ -68,6 +79,9 @@ public class UserController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
+        if(!userSession.isLoggedIn()) {
+            return "redirect:/home";
+        }
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("loginData", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData", bindingResult);

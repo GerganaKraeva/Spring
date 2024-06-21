@@ -15,22 +15,16 @@ public class UserSession {
 
     }
     public boolean isLoggedIn(){
-        return id>0;
+        return id > 0;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
-    public String getUsername() {
+    public String Username() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }
