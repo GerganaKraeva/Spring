@@ -23,7 +23,6 @@ public class UserController {
 
     @ModelAttribute("registerData")
     public UserRegisterDto registerDto() {
-
         return new UserRegisterDto();
     }
 

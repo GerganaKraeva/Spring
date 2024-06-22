@@ -24,6 +24,7 @@ public class RecipeController {
     public AddRecipeDto recipeData() {
         return  new AddRecipeDto();
     }
+
     @GetMapping("/recipe-add")
     public String addRecipe() {
         if(!userSession.isLoggedIn()) {
@@ -54,17 +55,17 @@ public class RecipeController {
             //duplicate name
             redirectAttributes.addFlashAttribute("recipeData", data);
             return "redirect:/recipe-add";
-
         }
 
         return "redirect:/home";
     }
 
-    @PostMapping("/add-to-favourites/{id}")
+    @PostMapping("/add-to-favourites/{recipeId}")
     public String addToFavourites(@PathVariable long recipeId){
 
         if(!userSession.isLoggedIn()) {
             return "redirect:/";
+
         }
         recipeService.addToFavourites(userSession.id(),recipeId);
         return "redirect:/home";

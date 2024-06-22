@@ -40,23 +40,24 @@ public class RecipeService {
 
         Optional<User> byId = userRepository.findById(userSession.id());
 
-        if(byId.isEmpty()){
+        if (byId.isEmpty()){
             return false;
         }
 
         Optional<Category> byName = categoryRepository.findByName(data.getCategory());
+
         if(byName.isEmpty()){
             return false;
         }
 
-        Recipe newRecipe = new Recipe();
-        newRecipe.setName(data.getName());
-        newRecipe.setIngredients(data.getIngredients());
-        newRecipe.setCategory(byName.get());
-        newRecipe.setAddedBy(byId.get());
-        recipeRepository.save(newRecipe);
+        Recipe recipe = new Recipe();
+        recipe.setName(data.getName());
+        recipe.setIngredients(data.getIngredients());
+        recipe.setCategory(byName.get());
+        recipe.setAddedBy(byId.get());
+        recipeRepository.save(recipe);
 
-        return false;
+        return true;
 
     }
 
