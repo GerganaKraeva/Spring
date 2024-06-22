@@ -13,8 +13,8 @@ spring:
         enabled: 'true'
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: ${db_username}
-    username: ${db_password}
+    password: ''
+    username: ''
     url: jdbc:mysql://localhost:3306/bonappetit?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
 logging:
   level:
@@ -27,17 +27,3 @@ logging:
     blog: WARN
 server:
   port: 8080
-  #Cloudinary Properties
-  #cloudinary:
-  #api-key:
-  #api-secret:
-  #cloud-name:
-  thymeleaf: # Thymeleaf
-    cache: false
-    mode: HTML
-    encoding: UTF-8
-    prefix: file:src/main/resources/templates/
-    resources: # Static resources
-      static-locations: file:src/main/resources/static/
-      cache:
-        period: 0
