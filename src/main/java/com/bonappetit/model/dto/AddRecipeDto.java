@@ -15,6 +15,9 @@ public class AddRecipeDto {
 
     @NotNull
     private CategoryName category;
+    public AddRecipeDto() {
+
+    }
 
     public String getName() {
         return name;
@@ -40,7 +43,5 @@ public class AddRecipeDto {
         this.category = category;
     }
 
-    public AddRecipeDto() {
 
-    }
 }

@@ -93,7 +93,6 @@ public class UserController {
 
         if (!success) {
             redirectAttributes.addFlashAttribute("loginError", true);
-
             return "redirect:/login";
 
         }

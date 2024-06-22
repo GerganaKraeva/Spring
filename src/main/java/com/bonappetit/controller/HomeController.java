@@ -63,7 +63,7 @@ public class HomeController {
 
         model.addAttribute("cocktailsData", cocktails);
         model.addAttribute("mainDishesData", mainDishes);
-        model.addAttribute("dessersData", desserts);
+        model.addAttribute("dessertsData", desserts);
         model.addAttribute("favouritesData", favourites);
 
         return "home";
