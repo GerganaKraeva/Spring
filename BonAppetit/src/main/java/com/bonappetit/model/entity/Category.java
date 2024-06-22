@@ -8,7 +8,8 @@ import java.util.List;
 @Entity
 @Table(name = "categories")
 public class Category {
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false, unique = true)
@@ -21,7 +22,14 @@ public class Category {
     private List <Recipe> recipes;
 
     public Category(){
+
         this.recipes=new ArrayList<>();
+    }
+
+    public Category(CategoryName name, String description) {
+        this();
+        this.name=name;
+        this.description=description;
     }
 
     public long getId() {
