@@ -34,7 +34,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String register() {
-        if(!userSession.isLoggedIn()) {
+        if(userSession.isLoggedIn()) {
             return "redirect:/home";
         }
         return "register";
@@ -46,7 +46,7 @@ public class UserController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
-        if(!userSession.isLoggedIn()) {
+        if(userSession.isLoggedIn()) {
             return "redirect:/home";
         }
         if (bindingResult.hasErrors() || !data.getPassword().equals(data.getConfirmPassword())) {
@@ -67,7 +67,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
-        if(!userSession.isLoggedIn()) {
+        if(userSession.isLoggedIn()) {
             return "redirect:/home";
         }
         return "login";
@@ -79,7 +79,7 @@ public class UserController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
-        if(!userSession.isLoggedIn()) {
+        if(userSession.isLoggedIn()) {
             return "redirect:/home";
         }
         if (bindingResult.hasErrors()) {
@@ -90,14 +90,23 @@ public class UserController {
             return "redirect:/login";
         }
         boolean success = userService.login(data);
+
         if (!success) {
             redirectAttributes.addFlashAttribute("loginError", true);
 
             return "redirect:/login";
 
         }
-
-
         return "redirect:/home";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        if (!userSession.isLoggedIn()) {
+            return "redirect:/";
+        }
+        userSession.logout();
+
+        return "redirect:/";
     }
 }

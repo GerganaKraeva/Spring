@@ -18,13 +18,19 @@ public class UserSession {
         return id > 0;
     }
 
-    public Long getId() {
+    public Long id() {
         return id;
     }
 
 
-    public String Username() {
+    public String username() {
         return username;
+    }
+
+
+    public void logout() {
+        id = 0;
+        username = null;
     }
 
 }

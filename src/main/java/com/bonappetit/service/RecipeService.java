@@ -10,6 +10,7 @@ import com.bonappetit.repo.CategoryRepository;
 import com.bonappetit.repo.RecipeRepository;
 import com.bonappetit.repo.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public class RecipeService {
             return false;
         }
 
-        Optional<User> byId = userRepository.findById(userSession.getId());
+        Optional<User> byId = userRepository.findById(userSession.id());
 
         if(byId.isEmpty()){
             return false;
@@ -71,4 +72,22 @@ public class RecipeService {
         }
         return result;
     }
+@Transactional
+    public void addToFavourites(Long id, long recipeId) {
+        Optional<User> userOpt = userRepository.findById(id);
+
+        if(userOpt.isEmpty()) {
+            return;
+        }
+        Optional<Recipe> recipeOpt = recipeRepository.findById(recipeId);
+
+        if(recipeOpt.isEmpty()) {
+            return;
+        }
+        userOpt.get().addFavourite(recipeOpt.get());
+
+        userRepository.save(userOpt.get());
+
+    }
+
 }
